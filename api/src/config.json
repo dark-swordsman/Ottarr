@@ -1,0 +1,13 @@
+{
+  "directories": {
+    "source": "/mnt/e/anal-test/torrents",
+    "media": "/mnt/e/anal-test/shows"
+  },
+  "database": {
+    "location": "192.168.0.232",
+    "port": 27017,
+    "database": "test-1",
+    "username": "app",
+    "password": "application1"
+  }
+}
