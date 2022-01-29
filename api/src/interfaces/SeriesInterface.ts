@@ -68,6 +68,14 @@ class SeriesInterface {
           const episodeIds = episodes.map((episode) => episode._id);
 
           // update seasons and series with episodes
+          seasons.forEach((season) => {
+            let seasonEpisodeIds: Array<string> = [];
+
+            episodes.forEach((episode) => { if (episode.season === season._id) seasonEpisodeIds.push(episode._id) });
+
+            SeasonInterface.findSeasonByIdAndUpdate(season._id, { episodes: seasonEpisodeIds });
+          });
+          
           resolve(await SeriesInterface.findSeriesByIdAndUpdate(`${series._id}`, { seasons: seasonIds, episodes: episodeIds }));
         });
     });

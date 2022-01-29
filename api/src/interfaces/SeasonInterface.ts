@@ -18,6 +18,16 @@ class SeasonInterface {
       });
     });
   }
+
+  static findSeasonByIdAndUpdate(id: string, data: object): Promise<Season> {
+    return new Promise((resolve, reject) => {
+      SeasonModel.findByIdAndUpdate(id, data, (err: Error | null, result: Season) => {
+        if (err) return reject(err);
+
+        resolve(result);
+      });
+    });
+  }
 }
 
 export default SeasonInterface;
