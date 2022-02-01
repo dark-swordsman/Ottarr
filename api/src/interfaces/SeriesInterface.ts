@@ -72,7 +72,7 @@ class SeriesInterface {
             let seasonEpisodeIds: Array<string> = [];
 
             episodes.forEach((episode) => { if (episode.season === season._id) seasonEpisodeIds.push(episode._id) });
-
+            // REMOVE UPDATES, AND CHANGE SEASON + SERIES TO NOT HAVE RELATIONSHIP TO EPISODE
             SeasonInterface.findSeasonByIdAndUpdate(season._id, { episodes: seasonEpisodeIds });
           });
           

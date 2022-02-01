@@ -1,7 +1,7 @@
 import express from "express";
 const LinkRouter = express.Router();
 
-import { Linker } from "../helpers";
+import { Linker } from "../utils";
 import LinkInterface from "../interfaces/LinkInterface";
 import MediaDirectoryInterface from "../interfaces/MediaDirectoryInterface";
 
@@ -13,7 +13,7 @@ LinkRouter.get("/:id", async (req: express.Request, res: express.Response) => {
     .catch((err) => res.send(err));
 });
 
-LinkRouter.post("/create", async (req: express.Request, res: express.Response) => {
+LinkRouter.post("/", async (req: express.Request, res: express.Response) => {
   try {
     const updatedLinkData: {
       originalDirectory: any;
