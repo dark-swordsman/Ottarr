@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import API from "../helper/API/API";
+import API from "../helpers/API/API";
 
 import {
   AddSeriesModal,
@@ -100,7 +100,7 @@ export default function AddSeries() {
     if (!searchQuery) return <div className="text-4xl text-white mt-12">Start with a search</div>;
     if (isLoading) return <div className="text-4xl text-white mt-12">Loading...</div>;
 
-    if (data) return <div style={{ gridTemplateColumns: "repeat(auto-fill, 14rem)" }} className="w-11/12 mx-auto mt-12 grid justify-between gap-8">{data.map((series, i) => <SeriesCard handleOnClick={handleAddSeriesClick} key={i + "-series"} series={series} />)}</div>;
+    if (data) return <div className="w-11/12 mx-auto mt-12 grid justify-between grid-cols-[repeat(auto-fill,14rem)] gap-8">{data.map((series, i) => <SeriesCard handleOnClick={handleAddSeriesClick} key={i + "-series"} series={series} />)}</div>;
 
     return null;
   }

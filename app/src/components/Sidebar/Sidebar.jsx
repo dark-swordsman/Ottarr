@@ -11,8 +11,8 @@ export default function Sidebar() {
       link: "/addseries"
     },
     {
-      name: "Test 2",
-      link: "/t2"
+      name: "File Management",
+      link: "/filemanagement"
     },
     {
       name: "Test 3",
