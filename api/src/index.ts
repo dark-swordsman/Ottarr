@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import express from "express";
+import cors from "cors";
 
 import dotenv from "dotenv";
 dotenv.config({ path: "src/.env" });
@@ -18,6 +19,7 @@ const dbURL = `mongodb://${database.location}:${database.port}/${database.databa
 mongoose.connect(dbURL);
 
 server.use(express.json());
+server.use(cors());
 
 server.use("/quality", QualityRouter);
 server.use("/mediadirectory", MediaDirectoryRouter);

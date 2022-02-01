@@ -1,5 +1,9 @@
-function Home() {
-  return <div>pee pee poo poo</div>
-}
+import { Layout } from "../components";
 
-export default Home;
+export default function Home() {
+  return (
+    <Layout title="Home">
+      test
+    </Layout>
+  );
+}
