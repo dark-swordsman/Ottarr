@@ -2,7 +2,7 @@ export default function SeriesCard({ series, handleOnClick }) {
   return (
     <div 
       style={{ backgroundImage: `url(${process.env.NEXT_PUBLIC_API_HOST}/tmdb/image${series.poster_path})` }}
-      className="duration-75 h-80 bg-slate-800 rounded-xl text-center overflow-hidden bg-[length:100%_100%] bg-center select-none hover:cursor-pointer hover:opacity-80 hover:bg-[length:105%_105%]"
+      className="duration-75 h-80 bg-slate-800 rounded-xl text-center overflow-hidden bg-no-repeat bg-[length:100%] bg-center select-none hover:cursor-pointer hover:opacity-80 hover:bg-[length:105%]"
       onClick={() => handleOnClick(series)}
     >
       <div className="h-1/3 w-full" />
