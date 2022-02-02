@@ -18,8 +18,6 @@ class SeriesInterface {
         .then(async (result) => {
           const seriesData: Series = {
             name: result.name,
-            episodes: [],
-            seasons: [],
             card: result.poster_path,
             banner: result.backdrop_path,
             tmdb_id: result.id
@@ -31,15 +29,14 @@ class SeriesInterface {
           let seasons: Array<{ [key: string]: any }> = [];
           let seasonsTMDB: Array<{ [key: string]: any }> = [];
           let episodes: Array<{ [key: string]: any }> = [];
-          
+
           // await Promise.all makes the rest of the code wait
           // iterate over result seasons and create in db
           await Promise.all(result.seasons.map(async (season: { [key: string]: any }) => {
             const seasonData: Season = {
               name: season.name,
               number: season.season_number,
-              series: series._id,
-              episodes: [],
+              series: series._id!,
               card: season.poster_path
             }
 
@@ -59,28 +56,16 @@ class SeriesInterface {
                 season: seasons.find((dbSeason) => dbSeason.number === season.season_number)!._id,
                 card: episode.still_path
               }
-              
+
               episodes.push(await EpisodeInterface.createEpisode(episodeData));
             }));
           }));
-          
-          const seasonIds = seasons.map((season) => season._id);
-          const episodeIds = episodes.map((episode) => episode._id);
 
-          // update seasons and series with episodes
-          seasons.forEach((season) => {
-            let seasonEpisodeIds: Array<string> = [];
-
-            episodes.forEach((episode) => { if (episode.season === season._id) seasonEpisodeIds.push(episode._id) });
-            // REMOVE UPDATES, AND CHANGE SEASON + SERIES TO NOT HAVE RELATIONSHIP TO EPISODE
-            SeasonInterface.findSeasonByIdAndUpdate(season._id, { episodes: seasonEpisodeIds });
-          });
-          
-          resolve(await SeriesInterface.findSeriesByIdAndUpdate(`${series._id}`, { seasons: seasonIds, episodes: episodeIds }));
+          resolve(series);
         });
     });
   }
-  
+
   static findSeriesById(id: string): Promise<Series> {
     return new Promise((resolve, reject) => {
       SeriesModel.findById(id, (err: Error | null, result: Series) => {
