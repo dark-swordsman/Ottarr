@@ -6,7 +6,7 @@ export default function Layout({ children, title }) {
   return (
     <div className="h-screen h-screen overflow-hidden">
       <Head>
-        <title>ANAL - {title}</title>
+        <title className="select-none">ANAL - {title}</title>
       </Head>
       <div className="w-100 bg-primary-800 h-16">
         <h1 className="text-3xl font-bold text-white ml-12 pt-3">ANAL</h1>

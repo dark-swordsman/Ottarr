@@ -1,12 +1,11 @@
-import { Schema, model, Types } from "mongoose";
-import { Episode } from "./EpisodeModel";
-import { Series } from "./SeriesModel";
+import { model, Schema, Types } from "mongoose";
+import { ISeries } from "./SeriesModel";
 
 export interface Season {
   _id?: Types.ObjectId;
   name: string;
   number: number;
-  series: Types.ObjectId | Series;
+  series: Types.ObjectId | ISeries;
   card?: string;
 }
 

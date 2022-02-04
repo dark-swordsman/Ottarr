@@ -5,6 +5,10 @@ class EpisodeInterface {
     return EpisodeModel.create(data);
   }
 
+  static findEpisodes(data: object): Promise<Episode[]> {
+    return EpisodeModel.find(data).exec();
+  }
+
   static findEpisodeById(id: string): Promise<Episode> {
     return new Promise((resolve, reject) => {
       EpisodeModel.findById({ _id: id }, (err: Error | null, result: Episode) => {

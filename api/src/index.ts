@@ -11,7 +11,9 @@ import {
   LinkRouter,
   TMDBRouter,
   SeriesRouter,
-  FileRouter
+  FileRouter,
+  SeasonRouter,
+  EpisodeRouter
 } from "./routes";
 import { MediaInfo } from "./helpers";
 
@@ -34,6 +36,8 @@ server.use("/mediadirectory", MediaDirectoryRouter);
 server.use("/link", LinkRouter);
 server.use("/tmdb", TMDBRouter);
 server.use("/series", SeriesRouter);
+server.use("/season", SeasonRouter);
+server.use("/episode", EpisodeRouter);
 server.use("/file", FileRouter);
 
 server.post("/mediainfo", (req: express.Request, res: express.Response) => {

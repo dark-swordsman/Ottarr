@@ -1,4 +1,8 @@
 import axios from "axios";
+import {
+  BannerSize,
+  PosterSize
+} from "types";
 
 class TMDBInterface {
   static searchForTVShow(query: string): Promise<object> {
@@ -8,7 +12,7 @@ class TMDBInterface {
         .catch((err) => reject(err));
     });
   }
-  
+
   static searchForMovie(query: string): Promise<{ [key: string]: any }> {
     return new Promise((resolve, reject) => {
       axios(`https://api.themoviedb.org/3/search/movie?api_key=${process.env.TMDB_KEY}&query=${query}`)
@@ -50,9 +54,10 @@ class TMDBInterface {
     });
   }
 
-  static getImage(imageName: string): Promise<{ contentType: string, data: any }> {
+  static getImage(imageName: string, imageSize: PosterSize | BannerSize): Promise<{ contentType: string, data: any }> {
     return new Promise((resolve, reject) => {
-      axios(`https://image.tmdb.org/t/p/original/${imageName}`, { responseType: "arraybuffer" })
+      console.log(`https://image.tmdb.org/t/p/${imageSize}/${imageName}`)
+      axios(`https://image.tmdb.org/t/p/${imageSize}/${imageName}`, { responseType: "arraybuffer" })
         .then((response) => {
           resolve({
             contentType: response.headers["content-type"],

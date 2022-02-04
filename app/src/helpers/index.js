@@ -1,5 +1,7 @@
 import clamp from "./clamp";
+import modalClose from "./modalClose";
 
 export {
-  clamp
+  clamp,
+  modalClose
 }

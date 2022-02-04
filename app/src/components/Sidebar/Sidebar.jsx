@@ -26,7 +26,7 @@ export default function Sidebar() {
 
   return (
     <div className="max-w-sidebar min-w-min w-full h-full bg-primary-975">
-      <div className="py-3 mb-3 text-center font-semibold text-xl cursor-pointer select-none text-white bg-zinc-700">
+      <div className="py-3 mb-3 text-center font-semibold text-xl select-none text-white bg-zinc-700">
         Menu
       </div>
       <div>

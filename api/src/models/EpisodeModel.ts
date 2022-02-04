@@ -1,13 +1,13 @@
-import { Schema, model, Types } from "mongoose";
+import { model, Schema, Types } from "mongoose";
 import { Link } from "./LinkModel";
 import { Season } from "./SeasonModel";
-import { Series } from "./SeriesModel";
+import { ISeries } from "./SeriesModel";
 
 export interface Episode {
   name: string;
   number: number;
   type: string;
-  series: Types.ObjectId | Series;
+  series: Types.ObjectId | ISeries;
   season?: Types.ObjectId | Season;
   links?: Types.ObjectId[] | Link;
   card?: string;
@@ -20,7 +20,14 @@ const Episode = new Schema<Episode>({
   series: { type: Schema.Types.ObjectId, required: true },
   season: { type: Schema.Types.ObjectId, required: false },
   links: { type: [Schema.Types.ObjectId], required: false },
-  card: { type: String, required: false },
+  card: {
+    type: String,
+    required: false,
+    validate: {
+      validator: (value: string) => /[a-z,A-Z,0-9,.]+/g.test(value),
+      message: "Image filename must not include slashes"
+    }
+  },
 }, {
   collection: "episode"
 });
