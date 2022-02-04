@@ -35,7 +35,7 @@ export default function SeasonList({ season, episodes }) {
     <div className="mb-5 select-none">
       <div
         className={classNames(
-          "bg-slate-800 text-white px-10 py-3 border border-slate-900 cursor-pointer duration-500 active:bg-slate-700",
+          "bg-slate-800 text-white px-10 py-3 border border-slate-900 cursor-pointer duration-75 hover:bg-slate-900",
           {
             "rounded-t-xl": isExpanded,
             "rounded-xl": !isExpanded,
