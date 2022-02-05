@@ -53,9 +53,7 @@ export default function Series() {
 
     episodes.sort((a, b) => a.number - b.number);
 
-    return (
-      <SeasonList key={`season-${i}`} season={season} episodes={episodes} />
-    );
+    return <SeasonList key={`season-${i}`} season={season} episodes={episodes} />;
   }
 
   function renderSeasons() {
@@ -81,7 +79,7 @@ export default function Series() {
 
   return (
     <Layout title={seriesData.name ? seriesData.name : "loading..."}>
-      <div className="w-full h-full bg-zinc-800 justify-center flex relative">
+      <div className="w-full min-h-full bg-zinc-800 justify-center flex relative">
         <Banner bannerURL={bannerURL} />
         <div className="z-10 container mx-auto px-8 sm:px-12 lg:px-16">
           <Title cardURL={cardURL} seriesData={seriesData} />

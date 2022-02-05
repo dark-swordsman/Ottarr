@@ -18,13 +18,14 @@ export default function SeasonList({ season, episodes }) {
   function renderTable() {
     return (
       <div
+        style={{ maxHeight: `${isExpanded ? Math.ceil(episodes.length * 2.0625) : 0}rem` }}
         className={classNames(
-          "overflow-hidden border-b border-gray-500 duration-500 rounded-b-lg",
+          "overflow-hidden border-b border-gray-500 duration-200 rounded-b-lg",
           // prettier-ignore
-          { "hidden": !isExpanded }
+          { "border-none": !isExpanded }
         )}
       >
-        <table className="w-full duration-[400ms]">
+        <table className="w-full">
           <tbody className="divide-y divide-gray-500">{renderEpisodes()}</tbody>
         </table>
       </div>
@@ -34,18 +35,13 @@ export default function SeasonList({ season, episodes }) {
   return (
     <div className="mb-5 select-none">
       <div
-        className={classNames(
-          "bg-slate-800 text-white px-10 py-3 border border-slate-900 cursor-pointer duration-75 hover:bg-slate-900",
-          {
-            "rounded-t-xl": isExpanded,
-            "rounded-xl": !isExpanded,
-          }
-        )}
+        className={classNames("bg-slate-800 text-white px-10 py-3 border border-slate-900 cursor-pointer duration-75 hover:bg-slate-900", {
+          "rounded-t-xl": isExpanded,
+          "rounded-xl": !isExpanded,
+        })}
         onClick={() => setIsExpanded(!isExpanded)}
       >
-        <div>
-          {season.number === 0 ? "Specials" : `Season ${season.number}`}
-        </div>
+        <div>{season.number === 0 ? "Specials" : `Season ${season.number}`}</div>
       </div>
       {renderTable()}
     </div>
