@@ -1,7 +1,8 @@
+import classNames from "classnames";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { Layout } from "../../components";
-import { Banner, SeasonList, Title } from "../../components/Series";
+import { Banner, SeasonList, Tabs, Title } from "../../components/Series";
 import API from "../../helpers/API/API";
 
 export default function Series() {
@@ -44,31 +45,6 @@ export default function Series() {
     console.log(episodeData);
   }, [seriesData, seasonData, episodeData]);
 
-  function renderSeasonList({ season, i }) {
-    let episodes = [];
-
-    episodeData.forEach((episode) => {
-      if (episode.season === season._id) return episodes.push(episode);
-    });
-
-    episodes.sort((a, b) => a.number - b.number);
-
-    return <SeasonList key={`season-${i}`} season={season} episodes={episodes} />;
-  }
-
-  function renderSeasons() {
-    const seasons = [...seasonData];
-
-    seasons.sort((a, b) => a.number - b.number);
-    if (seasons[0].number === 0) seasons.push(seasons.shift()); // move specials to bottom
-
-    console.log(seasons);
-
-    if (episodeData.length > 0 && seasonData.length > 0) {
-      return seasons.map((season, i) => renderSeasonList({ season, i }));
-    }
-  }
-
   if (Object.keys(seriesData).length === 0 || episodeData.length === 0) {
     return (
       <Layout>
@@ -83,7 +59,7 @@ export default function Series() {
         <Banner bannerURL={bannerURL} />
         <div className="z-10 container mx-auto px-8 sm:px-12 lg:px-16">
           <Title cardURL={cardURL} seriesData={seriesData} />
-          <div className="mt-12">{renderSeasons()}</div>
+          <Tabs series={seriesData} seasons={seasonData} episodes={episodeData} />
         </div>
       </div>
     </Layout>

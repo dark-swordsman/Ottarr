@@ -33,7 +33,7 @@ export default function SeasonList({ season, episodes }) {
   }
 
   return (
-    <div className="mb-5 select-none">
+    <div className="mb-3 select-none">
       <div
         className={classNames("bg-slate-800 text-white px-10 py-3 border border-slate-900 cursor-pointer duration-75 hover:bg-slate-900", {
           "rounded-t-xl": isExpanded,
