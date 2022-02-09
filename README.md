@@ -1,8 +1,8 @@
 # ANAL
 
 <div align="center">
- <a href="https://discord.gg/XcbWtJqaN9">
-  <img src="https://img.shields.io/discord/940821187259404358?color=%237289da&logo=discord&logoColor=white&logoWidth=20&label=" />
+  <a href="https://discord.gg/XcbWtJqaN9">
+    <img src="https://img.shields.io/discord/940821187259404358?color=%237289da&logo=discord&logoColor=white&logoWidth=20&label=" />
   </a>
 </div>
 
