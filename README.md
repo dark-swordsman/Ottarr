@@ -1,6 +1,10 @@
 # ANAL
 
-[![ANAL Discord Server](https://img.shields.io/discord/940821187259404358?color=%237289da&logo=discord&logoColor=white&logoWidth=20&label=)](https://discord.gg/nPBasg6CTW)
+<div align="center">
+ <a href="https://discord.gg/nPBasg6CTW">
+  <img src="https://img.shields.io/discord/940821187259404358?color=%237289da&logo=discord&logoColor=white&logoWidth=20&label=" />
+  </a>
+</div>
 
 A Normal Anime Library (System)
 
