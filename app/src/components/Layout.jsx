@@ -13,9 +13,7 @@ export default function Layout({ children, title }) {
       </div>
       <div className="flex h-full">
         <Sidebar />
-        <div style={{ overflow: "overlay" }} className="bg-zinc-900 w-full">
-          {children}
-        </div>
+        <div className="bg-zinc-900 w-full overflow-scroll">{children}</div>
       </div>
     </div>
   );
