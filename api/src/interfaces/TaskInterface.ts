@@ -12,7 +12,11 @@ class TaskInterface {
 
   public static updateTaskById() {}
 
-  public static executeTask() {}
+  public static executeTask() {
+    // update task with status field + create event saying task started, and then resolve to say that task was "started"
+    // call method on task
+    // when method is done, update task and create new event saying task completed
+  }
 
   private static executeInterfaceMethod(action: Action) {
     // based on an action, execute a method from another interface,
