@@ -27,6 +27,12 @@ We would most likely just import the interfaces for various objects, like task i
 
   Actions would be official tags that we can enforce via a TS type that trigger certain methods. So we can have action + associatd data.
 
+SKIPS
+  It could be possible to have actions be skipped... maybe? Though ideally the --
+
+REVERTING
+  Reversions will have their own event. They also require an opposite method to undo, say LINK_DELETE when there was LINK_CREATE
+
 EVENTS
   There should also be an "events" model/interface to simply log events that have happened, mainly to keep track of what the tasks are doing.
 
@@ -40,4 +46,5 @@ export interface ITask {
   title: string;
   actions: Action[];
   status: TaskStatus;
+  reverted: boolean; // default false - reversions create a separate event object to track history
 }

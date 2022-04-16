@@ -5,6 +5,7 @@ interface Action {
 
 enum ActionMethod {
   LINK_CREATE = "LINK_CREATE",
+  LINK_DELETE = "LINK_DELETE",
 }
 
 enum TaskStatus {
