@@ -6,7 +6,7 @@
     "outDir": ".",
     "composite": true,
     "esModuleInterop": true
-  }, 
-  "include": [ "./types/*.ts" ],
+  },
+  "include": ["./types/**/*"],
   "exclude": []
 }
