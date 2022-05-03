@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "pm2": "^5.2.0"
+  },
+  "scripts": {
+    "dev": "pm2 start ecosystem.config.js --only \"api-dev,app-dev\""
+  }
+}

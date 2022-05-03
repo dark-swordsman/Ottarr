@@ -13,9 +13,10 @@ import {
   SeriesRouter,
   FileRouter,
   SeasonRouter,
-  EpisodeRouter
+  EpisodeRouter,
 } from "./routes";
 import { MediaInfo } from "./helpers";
+import { ServiceManager } from "./services";
 
 // definitions
 
@@ -47,6 +48,8 @@ server.post("/mediainfo", (req: express.Request, res: express.Response) => {
 });
 
 server.listen(port, () => console.log(`Running server on: ${port}!`));
+
+ServiceManager.connect();
 
 // debug
 
