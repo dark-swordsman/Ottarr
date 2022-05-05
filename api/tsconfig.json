@@ -1,9 +1,7 @@
 {
   "compilerOptions": {
     "target": "es2017" /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */,
-    "lib": [
-      "es5", "es6", "dom", "dom.iterable"
-    ],
+    "lib": ["es5", "es6", "dom", "dom.iterable"],
 
     /* Modules */
     "module": "commonjs" /* Specify what module code is generated. */,
@@ -21,15 +19,14 @@
     "strict": true /* Enable all strict type-checking options. */,
 
     /* Completeness */
-    "skipLibCheck": true, /* Skip type checking all .d.ts files. */
-    "baseUrl": ".", 
+    "skipLibCheck": true /* Skip type checking all .d.ts files. */,
+    "baseUrl": ".",
     "paths": {
-      "types": ["../types"]
+      "@types": ["../types"],
+      "src/*": ["./src/*"]
     }
   },
-  "include": ["./src/**/**/*", "./src/config.json"],
+  "include": ["./src/**/*", "./src/config.json"],
   "exclude": ["node_modules"],
-  "references": [
-    { "path": "../" }
-  ]
+  "references": [{ "path": "../" }]
 }

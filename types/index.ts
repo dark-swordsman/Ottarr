@@ -1,5 +1,7 @@
-import { Action, ActionMethod, TaskStatus } from "./Tasks";
+import { TaskStatus } from "./Tasks";
 import BannerSize from "./BannerSize";
 import PosterSize from "./PosterSize";
+import ActionType from "./ActionTypes";
+import { RMQType, RMQOptions } from "./RabbitMQ";
 
-export { Action, ActionMethod, BannerSize, PosterSize, TaskStatus };
+export { ActionType, BannerSize, PosterSize, TaskStatus, RMQType, RMQOptions };

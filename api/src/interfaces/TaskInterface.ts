@@ -1,31 +1,55 @@
-// main task update methods + task execution method
-// task execution method should refernce a "decide method" method
-
-import { Action, ActionMethod } from "../../../types";
+import { IAction } from "src/models/ActionModel";
+import TaskModel, { ITask } from "src/models/TaskModel";
+import ActionInterface from "./ActionInterface";
 
 class TaskInterface {
-  public static createTask() {}
-
-  public static findTasks() {}
-
-  public static findTaskById() {}
-
-  public static updateTaskById() {}
-
-  public static executeTask() {
-    // update task with status field + create event saying task started, and then resolve to say that task was "started"
-    // call method on task
-    // when method is done, update task and create new event saying task completed
+  public static createTask(data: ITask): Promise<ITask> {
+    return TaskModel.create(data);
   }
 
-  private static executeInterfaceMethod(action: Action) {
-    // based on an action, execute a method from another interface,
-    // passing the data of the action to that method.
-    // tasks act as delayed/cached data with context/metadata
+  public static findTask(data: { [key: string]: any }): Promise<ITask[]> {
+    return TaskModel.find(data).exec();
   }
 
-  private static determineInterfaceMethod(actionMethod: ActionMethod) {
-    // determine with method to use on another interface to complete a task,
-    // returning that method just to keep the code more visually separate
+  public static findTaskById(id: string): Promise<ITask> {
+    return new Promise((resolve, reject) => {
+      TaskModel.findById(id, (err: Error | null, result: ITask) => {
+        if (err) return reject(err);
+
+        resolve(result);
+      });
+    });
+  }
+
+  public static findTaskByIdAndUpdate(id: string, data: object): Promise<ITask> {
+    return new Promise((resolve, reject) => {
+      TaskModel.findByIdAndUpdate(id, data, (err: Error | null, result: ITask) => {
+        if (err) return reject(err);
+
+        resolve(result);
+      });
+    });
+  }
+
+  public static createTaskAndExecute({
+    task,
+    actions,
+  }: {
+    task: ITask;
+    actions: IAction[];
+  }): Promise<ITask> {
+    return new Promise(async (resolve, reject) => {
+      const taskObject = await this.createTask(task);
+      // create actions from task data
+      const actionObjects = actions.map(
+        async (action) => await ActionInterface.createAction(action)
+      );
+      // send actions to queue
+      actionObjects.forEach(() => {
+        // use rabbitmq helper
+      });
+      // return response to user
+      resolve(taskObject);
+    });
   }
 }

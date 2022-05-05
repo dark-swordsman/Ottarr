@@ -1,5 +1,5 @@
 import { model, Schema, Types } from "mongoose";
-import { Action, TaskStatus } from "types";
+import { TaskStatus } from "@types";
 
 // task has actions
 // actions have data like a normal request + endpoint
@@ -44,7 +44,17 @@ EVENTS
 export interface ITask {
   _id?: Types.ObjectId;
   title: string;
-  actions: Action[];
   status: TaskStatus;
   reverted: boolean; // default false - reversions create a separate event object to track history
 }
+
+const Task = new Schema<ITask>(
+  {
+    title: { type: String, required: true },
+    status: { type: String, required: true, default: TaskStatus.QUEUED },
+    reverted: { type: Boolean, required: true, default: false },
+  },
+  { collection: "task" }
+);
+
+export default model<ITask>("Task", Task);

@@ -1,13 +1,3 @@
-interface Action {
-  method: ActionMethod;
-  data: object | object[];
-}
-
-enum ActionMethod {
-  LINK_CREATE = "LINK_CREATE",
-  LINK_DELETE = "LINK_DELETE",
-}
-
 enum TaskStatus {
   // main statuses that are required
   COMPLETE = "COMPLETE", // completed
@@ -18,4 +8,4 @@ enum TaskStatus {
   WAITING = "WAITING", // the task is waiting on another task, service, request, etc.
 }
 
-export { Action, ActionMethod, TaskStatus };
+export { TaskStatus };

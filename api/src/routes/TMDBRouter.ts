@@ -1,8 +1,5 @@
 import express from "express";
-import {
-  BannerSize,
-  PosterSize
-} from "types";
+import { BannerSize, PosterSize } from "@types";
 const TMDBRouter = express.Router();
 
 import TMDBInterface from "../interfaces/TMDBInterface";
@@ -30,7 +27,8 @@ TMDBRouter.get("/movie/:id", (req: express.Request, res: express.Response) => {
 });
 
 TMDBRouter.get("/image/poster/:id", async (req: express.Request, res: express.Response) => {
-  if (!req.query.imageSize) return res.status(400).send({ error: true, description: "must provide 'imageSize' as query" });
+  if (!req.query.imageSize)
+    return res.status(400).send({ error: true, description: "must provide 'imageSize' as query" });
 
   TMDBInterface.getImage(req.params.id, req.query.imageSize as PosterSize)
     .then((result) => {
@@ -46,7 +44,8 @@ TMDBRouter.get("/image/poster/:id", async (req: express.Request, res: express.Re
 });
 
 TMDBRouter.get("/image/banner/:id", async (req: express.Request, res: express.Response) => {
-  if (!req.query.imageSize) return res.status(400).send({ error: true, description: "must provide 'imageSize' as query" });
+  if (!req.query.imageSize)
+    return res.status(400).send({ error: true, description: "must provide 'imageSize' as query" });
 
   TMDBInterface.getImage(req.params.id, req.query.imageSize as BannerSize)
     .then((result) => {
