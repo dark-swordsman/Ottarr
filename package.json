@@ -1,0 +1,19 @@
+{
+  "name": "ottarr",
+  "version": "0.0.0",
+  "description": "a user-first media management system",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/dark-swordsman/Ottarr.git"
+  },
+  "author": "Kyle Barr",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dark-swordsman/Ottarr/issues"
+  },
+  "homepage": "https://github.com/dark-swordsman/Ottarr#readme"
+}
