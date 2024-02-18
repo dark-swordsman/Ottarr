@@ -22,9 +22,12 @@
   },
   "dependencies": {
     "@types/node": "^20.11.19",
-    "dotenv": "^16.4.4"
+    "dotenv": "^16.4.4",
+    "json-diff": "^1.0.6"
   },
   "nodemonConfig": {
-    "ignore": ["jsonOutput/*"]
+    "ignore": [
+      "jsonOutput/*"
+    ]
   }
 }

@@ -1,14 +1,14 @@
 import { Dirent } from "fs";
 import fs from "fs/promises";
 
-const customDir = {};
+let _customDir = {};
 let directoryElements = 0;
 const time = {
     start: 0,
     end: 0
 }
 
-export default async function FileRead(writeTest: boolean) {
+export async function FileReadTest(writeTest: boolean) {
     const { DIRECTORY } = process.env;
     if (writeTest) {
         for (let i = 0; i < 200; i++) {
@@ -23,9 +23,9 @@ export default async function FileRead(writeTest: boolean) {
     }
 }
 
-async function ReadDirectory(directory: string) {
-    console.log("\n--- READING DIRECTORY ---\n")
-    const start = process.hrtime()
+export async function ReadDirectory(directory: string) {
+    console.log("\n--- READING DIRECTORY ---");
+    const start = process.hrtime();
     time.start = start[0] * 1000000 + start[1] / 1000;
 
     const dirContents = await fs.readdir(directory, { withFileTypes: true, recursive: true });
@@ -37,22 +37,27 @@ async function ReadDirectory(directory: string) {
         if (pathSplit.length > 1) {
             createChildObject(dirent, pathSplit);
         } else {
-            customDir[dirent.name] = createObject(dirent.name, dirent.isDirectory());
+            _customDir[dirent.name] = createObject(dirent.name, dirent.isDirectory());
         }
     });
     
-    await fs.writeFile(`./jsonOutput/testout.json`, JSON.stringify(customDir, null, 2));
+    // await fs.writeFile(`./jsonOutput/testout.json`, JSON.stringify(customDir, null, 2));
     
     const end = process.hrtime();
     time.end = end[0] * 1000000 + end[1] / 1000;
     console.log(`Took ${((time.end - time.start) / 1000).toLocaleString(undefined, { minimumFractionDigits: 3 })} ms to process ${directoryElements} elements.`);
+    
+    const customDir = _customDir;
+    _customDir = {};
+    directoryElements = 0;
+    return customDir;
 }
 
 function createChildObject(dirent: Dirent, pathSplit: string[]) {
     let currentDir;
 
     pathSplit.forEach((str, i) => {
-        if (i == 0) return currentDir = customDir;
+        if (i == 0) return currentDir = _customDir;
         if (currentDir[str]) currentDir = currentDir[str].children;
         currentDir[dirent.name] = createObject(dirent.name, dirent.isDirectory());
     });

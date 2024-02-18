@@ -1,6 +1,13 @@
 import dotenv from "dotenv";
-import FileRead from "./fileReadTest";
+import { diffString } from "json-diff";
+import { ReadDirectory } from "./helpers/ReadDirectory";
 
 dotenv.config();
 
-FileRead(false);
+let lastDirectory;
+
+setInterval(async () => {
+    const newDirectory = await ReadDirectory(process.env.DIRECTORY);
+    if (lastDirectory) console.log(diffString(lastDirectory, newDirectory));
+    lastDirectory = newDirectory;
+}, 1000 * 5);
