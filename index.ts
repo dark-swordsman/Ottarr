@@ -3,4 +3,4 @@ import FileRead from "./fileReadTest";
 
 dotenv.config();
 
-FileRead();
+FileRead(false);
