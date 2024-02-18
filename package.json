@@ -23,5 +23,8 @@
   "dependencies": {
     "@types/node": "^20.11.19",
     "dotenv": "^16.4.4"
+  },
+  "nodemonConfig": {
+    "ignore": ["jsonOutput/*"]
   }
 }

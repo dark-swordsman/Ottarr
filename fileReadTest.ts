@@ -1,7 +1,8 @@
+import strict from "assert/strict";
 import { Dirent } from "fs";
 import fs from "fs/promises";
 
-const customDir: Entity[] = [];
+const customDir = {};
 
 export default async function FileRead() {
     const { DIRECTORY } = process.env;
@@ -10,15 +11,57 @@ export default async function FileRead() {
 }
 
 async function ReadDirectory(directory: string) {
-    const dirContents = await fs.readdir(directory, { withFileTypes: true, recursive: true });;
+    console.log("\n--- READING DIRECTORY ---\n")
+    const dirContents = await fs.readdir(directory, { withFileTypes: true, recursive: true });
 
-    return dirContents.map((_de) => createObject(_de, _de.path.split("\\")[_de.path.split("\\").length - 1]));
+    dirContents.forEach((dirent) => {
+        const pathSplit = dirent.path.split("\\");
+
+        if (pathSplit.length > 1) {
+            createChildObject(dirent, pathSplit);
+        } else {
+            customDir[dirent.name] = createObject(dirent.name, dirent.isDirectory());
+        }
+    });
+
+    await fs.writeFile(`./jsonOutput/testout.json`, JSON.stringify(customDir, null, 2));
 }
 
-type DE = {
+function createChildObject(dirent: Dirent, pathSplit: string[]) {
+    let currentDir;
+
+    pathSplit.forEach((str, i) => {
+        if (i == 0) return currentDir = customDir;
+        if (currentDir[str]) currentDir = currentDir[str].children;
+        currentDir[dirent.name] = createObject(dirent.name, dirent.isDirectory());
+    });
+}
+
+function createObject(name: string, dir: boolean): DirectoryEntity {
+    // will replace with optional parent when using IDs
+    if (dir) {
+        return { 
+            name: name,
+            type: DirectoryEntityType.FOLDER,
+            children: {}
+        }
+    } else {
+        return { 
+            name: name,
+            type: DirectoryEntityType.FILE
+        };
+    }
+}
+
+enum DirectoryEntityType {
+    "FILE",
+    "FOLDER"
+}
+
+type DirectoryEntity = {
     name: string,
-    type: "FILE" | "FOLDER",
-    children?: DE[]
+    type: DirectoryEntityType,
+    children?: {}
 }
 
 type Entity = {
@@ -27,13 +70,8 @@ type Entity = {
     parent?: string
 }
 
-function createObject<Entity>(DirectoryObject: Dirent, parent?: string) {
-    // will replace with optional parent when using IDs
-    return { 
-        name: DirectoryObject.name,
-        isDir: DirectoryObject.isDirectory(),
-        parent: parent
-    };
-}
-
-// maybe do JSON object for initial directory structure
+/*
+    read objects
+    if folder, find any objets with parent
+    recursive
+*/
