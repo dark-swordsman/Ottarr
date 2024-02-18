@@ -4,7 +4,7 @@
   "description": "a user-first media management system",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon index.ts"
   },
   "repository": {
     "type": "git",
@@ -15,5 +15,13 @@
   "bugs": {
     "url": "https://github.com/dark-swordsman/Ottarr/issues"
   },
-  "homepage": "https://github.com/dark-swordsman/Ottarr#readme"
+  "homepage": "https://github.com/dark-swordsman/Ottarr#readme",
+  "devDependencies": {
+    "nodemon": "^3.0.3",
+    "ts-node": "^10.9.2"
+  },
+  "dependencies": {
+    "@types/node": "^20.11.19",
+    "dotenv": "^16.4.4"
+  }
 }
